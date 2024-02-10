@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Message/assets/css/style.css">
+    <link rel="stylesheet" href="~/Message/assets/css/animations.css">
+    <link rel="stylesheet" href="~/Message/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Message/assets/icons/fontawesome6/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+
+    <title>Employee Eclipe</title>
+</head>
+
+<body>
+    <div class="chat-body-wrap">
+        <div class="chat-card shadow">
+            <div class="chat-card-header">
+                <span>Chat With Company</span>
+            </div>
+            <div class="chat-card-body">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="~/Message/assets/icons/fontawesome6/all.min.js"></script>
+    <script src="~/Message/assets/js/bootstrap.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+
+</html>

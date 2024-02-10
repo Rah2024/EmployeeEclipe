@@ -1,0 +1,21 @@
+:root{
+    --primary-color:#3a7bd5;
+    --secondary-color:#00d2ff;
+
+    --section-color:#3a7bd55a;
+
+    --gradient-color-1:#3a7bd5;
+    --gradient-color-2:#00d2ff;
+
+    --gradient-color-1-light:#3a7bd582;
+    --gradient-color-2-light:#00d0ff81;
+
+    --text-color-light:#ffffff;
+    --text-color-dark:#000000;
+
+    --border-dark:#000000;
+    --border-ight:#ffffff;
+
+    --contact-section:#3a7bd589;
+
+}

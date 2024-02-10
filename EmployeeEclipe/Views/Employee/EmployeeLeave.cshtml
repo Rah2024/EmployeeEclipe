@@ -1,0 +1,100 @@
+﻿@model IEnumerable<EmployeeEclipe.ViewModel.EmployeeLeaveViewModel>
+@{
+    ViewData["Title"] = "EmployeeLeave";
+    Layout = "~/Views/Shared/_LayoutHR.cshtml";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashborad</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Employee Leave</a></li>
+                    <li class="breadcrumb-item active">Index</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a asp-action="AddLeave" style="float: left;" class="btn btn-primary btn-sm">Add New Employee Leave</a>
+                        <button id="printButton" style="float: right;" class="btn btn-warning btn-sm">PDF</button>
+
+                    </div>
+                    <section id="sectionToPrint">
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="ProDataTable" width="100%" class="table table-bordered table-striped">
+                                    <thead>
+                                        <h2 class="text-center mb-4">Your Leave List</h2>
+
+                                        <tr>
+
+                                            <th>Your Name</th>
+                                            <th>Leave Name</th>
+                                            <th>Leave Taken</th>
+                                            <th>Total allow Leave</th>
+                                            <th>Available Leave</th>
+                                            <th>Status</th>
+
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.EmployeeName</td>
+                                                <td>@item.LeaveName</td>
+                                                <td>@item.LeaveDate</td>
+                                                <td>@item.TotalLeave</td>
+
+                                                @{
+                                                    string[] leavePeriodParts = item.LeaveDate.Split(" to ");
+                                                    DateTime startDate = DateTime.Parse(leavePeriodParts[0]);
+                                                    DateTime endDate = DateTime.Parse(leavePeriodParts[1]);
+                                                    TimeSpan span = endDate - startDate;
+                                                    int totalLeaveDays = span.Days + 1;
+                                                }
+                                                <td>@(int.Parse(item.TotalLeave) - totalLeaveDays)</td>
+
+                                                <td>@item.LeaveStatus</td>
+                                            </tr>
+                                        }
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+       
+        function printSectionAsPDF() {
+            const element = document.getElementById("sectionToPrint");
+            html2pdf().from(element).save("Employee Leave.pdf");
+        }
+        document.getElementById("printButton").addEventListener("click", printSectionAsPDF);
+    </script>
+}

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<EmployeeEclipe.ViewModel.SalaryViewModel>
+@{
+    ViewData["Title"] = "Salary";
+    Layout = "~/Views/Shared/_LayoutHR.cshtml";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashborad</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Salary</a></li>
+                    <li class="breadcrumb-item active">Index</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a style="float: left;" class="btn btn-primary btn-sm">Your Salary List</a>
+                        <button id="printButton" style="float: right;" class="btn btn-warning btn-sm">PDF</button>
+
+                    </div>
+                    <section id="sectionToPrint">
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="ProDataTable" width="100%" class="table table-bordered table-striped">
+                                    <thead>
+                                        <h2 class="text-center mb-4">Your Salary List</h2>
+
+                                        <tr>
+
+                                            <th>Name</th>
+                                            <th>Username (Office ID)</th>
+                                            <th>Department</th>
+                                            <th>Designation</th>
+                                            <th>Salary</th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.FullName</td>
+                                                <td>@item.OfficeUserName</td>
+                                                <td>@item.DepartmentName</td>
+                                                <td>@item.Designation</td>                                               
+                                                <td>@item.Salary</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+
+        function printSectionAsPDF() {
+            const element = document.getElementById("sectionToPrint");
+            html2pdf().from(element).save("Salary.pdf");
+        }
+        document.getElementById("printButton").addEventListener("click", printSectionAsPDF);
+    </script>
+}

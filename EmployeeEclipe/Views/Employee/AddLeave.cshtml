@@ -1,0 +1,80 @@
+﻿@model EmployeeEclipe.ViewModel.EmployeeLeaveViewModel
+@{
+    ViewData["Title"] = "AddLeave";
+    Layout = "~/Views/Shared/_LayoutHR.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashborad</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Add Leave</a></li>
+                    <li class="breadcrumb-item active">Create</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Add new Leave</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-action="AddLeave">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Small description</label>
+                                        <input asp-for="LeaveName" class="form-control" placeholder="Description" required />
+                                        <span asp-validation-for="LeaveName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Select Leave Type</label>
+                                        <select asp-for="LeaveId" asp-items="ViewBag.LeaveType" class="form-control" required>
+                                            <option selected disabled>Select Leave type</option>
+                                        </select>
+                                        <span asp-validation-for="LeaveId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="date-range">Select Date Range</label>
+                                <input class="form-control" id="dateInput" asp-for="LeaveDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+@section Scripts {
+    <script>
+        flatpickr('#dateInput', {
+            mode: 'range',
+            dateFormat: 'Y-m-d',
+            defaultDate: 'today',
+        });
+
+    </script>
+}

@@ -1,0 +1,94 @@
+﻿@model EmployeeEclipe.Models.NoticBorad
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutHR.cshtml";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashborad</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Notice Borad</a></li>
+                    <li class="breadcrumb-item active">Create</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Add new Notice Borad</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                            <input  type="hidden" asp-for="Id"/>
+                            <input type="hidden" asp-for="UploadFile" />
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="Name" class="control-label"></label>
+                                        <input asp-for="Name" class="form-control" placeholder="Notice Name" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label  class="control-label">
+                                  Do you want to change?
+                                        </label>
+                                        <input type="file" asp-for="UploadName" class="form-control" accept=".pdf" />
+                                        <span asp-validation-for="UploadFile" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Read Upload attachment</label>
+                                    <div class="form-control">
+                                        @if (Model.UploadFile != null)
+                                        {
+                                            <a href="@Url.Content("~/UploadContent/" + Model.UploadFile)" target="_blank">Read attachment</a>
+
+                                        }
+                                        else
+                                        {
+
+                                            <p>No attachment upload </p>
+                                        }
+                                    </div>
+                            
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea placeholder="Description" asp-for="Description" required class="form-control" style="width: 100%; height: 200px;">
+       </textarea>
+
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Update" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

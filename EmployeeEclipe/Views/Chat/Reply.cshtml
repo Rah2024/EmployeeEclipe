@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "EmployeeReply";
+    Layout = "~/Views/Shared/_LayoutMessage.cshtml";
+}
+
+
+
+<div class="message-place">
+    <input type="hidden" value="@ViewBag.userid" id="UserId" />
+    <input type="hidden" value="@ViewBag.HRAdminId" id="HRId" />
+    <input type="hidden" value="@ViewBag.employeeId" id="employeeId" />
+    <input type="hidden" value="@ViewBag.Role" id="Role" />
+    <div class="message-place-wrap" id="userMessage">
+    </div>
+</div>
+
+<div class="message-input">
+    <div class="message-input-wrap">
+        <input type="text" placeholder="Type Your Message..." id="messageInput">
+        <button type="button" id="sendButton">Send</button>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/Replychat.js"></script>
+}
+
