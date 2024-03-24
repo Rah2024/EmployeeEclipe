@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace EmployeeEclipe.Controllers
 {
-    [Authorize]
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -21,22 +21,32 @@ namespace EmployeeEclipe.Controllers
 
         public async Task< IActionResult> Index()
         {
+
             var LoginUser = await _userManager.GetUserAsync(User);
-            var roles = await _userManager.GetRolesAsync(LoginUser);
+            if (LoginUser != null)
+            {
+                var roles = await _userManager.GetRolesAsync(LoginUser);
 
-            if (LoginUser == null)
-            {
-                return RedirectToAction("/Identity/Account/Login");
+                if (LoginUser == null)
+                {
+                    return RedirectToAction("/Identity/Account/Login");
+                }
+                else if (roles.Contains("HRAdmin"))
+                {
+                    return RedirectToAction("Dashborad", "Departments");
+
+                }
+                else if (roles.Contains("Employee"))
+                {
+                    return RedirectToAction("Dashborad", "Employee");
+                }
             }
-            else if(roles.Contains("HRAdmin"))
+            else
             {
-                return RedirectToAction("Dashborad", "Departments");
+                return Redirect("/Identity/Account/Login");
 
             }
-            else if (roles.Contains("Employee"))
-            {
-                return RedirectToAction("Dashborad", "Employee");
-            }
+
 
             return View();
         }

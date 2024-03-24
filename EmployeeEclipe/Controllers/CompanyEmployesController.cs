@@ -34,10 +34,19 @@ namespace EmployeeEclipe.Controllers
         {
             ViewBag.Department = new SelectList(_UnitofWork.Departments.GetAll(), "Id", "Name");
             return View();
+
         }
+
         [HttpPost]
         public async Task< IActionResult> AddEmployee(CompanyEmployesViewModel company )
         {
+
+            if(company.DateOfBirth == company.DateOfjoining)
+            {
+                ModelState.AddModelError(string.Empty, "Date of birth and date of joining is same.");
+                return View(company);
+            }
+
 
             var userEmail = _context.Users.Where(x=>x.Email == company.Email).FirstOrDefault();
             if(userEmail==null)
@@ -64,7 +73,13 @@ namespace EmployeeEclipe.Controllers
                     await _userManager.AddToRoleAsync(user, "Employee");
                     return RedirectToAction("EmployeeList");
                 }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Password doesn't contain special and uppercase letters.");
+                    return View(company);
+                }
             }
+
             else
             {
                 ModelState.AddModelError(string.Empty, "This Email is already available.");
@@ -72,7 +87,7 @@ namespace EmployeeEclipe.Controllers
 
             }
 
-            return View();
+           
         }
     
         public IActionResult EditEmployee(string EmployeeId)
@@ -188,7 +203,9 @@ namespace EmployeeEclipe.Controllers
                            TotalLeave = leave.LeaveInYear,
                            LeaveStatus = record.LeaveStatus
                        }).ToList();
-            return View(obj);
+
+            ViewBag.Employeeleave = _context.EmplyeeLeaveRecords.Where(x=>x.LeaveStatus =="Pending").Count();
+                return View(obj);
         }
         public IActionResult UpdateStatus(int id)
         {

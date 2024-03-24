@@ -9,11 +9,12 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>Employee Eclipe </b>HR Managment System </a>
+        <a href="#"><b>Employee Eclipse </b>HR Management System </a>
     </div>
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Sign In</p>
+           
 
             <form id="account" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -40,14 +41,14 @@
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
 
                 <div class="row">
-                    <div class="col-8">
+@*                     <div class="col-8">
                         <div class="icheck-primary">
                             <label asp-for="Input.RememberMe" class="form-label">
                                 <input class="form-check-input" asp-for="Input.RememberMe" />
                                 @Html.DisplayNameFor(m => m.Input.RememberMe)
                             </label>
                         </div>
-                    </div>
+                    </div> *@
                     <div class="col-4">
                         <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
                     </div>
